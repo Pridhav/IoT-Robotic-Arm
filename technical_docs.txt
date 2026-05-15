@@ -1,0 +1,28 @@
+==================================================
+PROJECT: IoT Robotic Arm - Industrial Dyeing 
+TECHNICAL SPECIFICATIONS & PINOUT
+==================================================
+
+CONTROLLER: ESP32 (WROOM-32)
+ACTUATORS: 4x SG90 Micro Servos
+POWER: 5V DC External Rail (Common Ground with ESP32)
+
+PINOUT CONFIGURATION:
+--------------------------------------------------
+ID | COMPONENT | PIN (ESP32) | NOTES
+--------------------------------------------------
+1  | Base      | GPIO 13     | 180° Rotation
+2  | Shoulder  | GPIO 15     | Torque-heavy joint
+3  | Elbow     | GPIO 18     | Path-optimized
+4  | Gripper   | GPIO 19     | Force-limited (Virtual)
+--------------------------------------------------
+
+NETWORK ARCHITECTURE:
+- SSID: Eco
+- Protocol: HTTP / REST API
+- Service Discovery: mDNS (dye-robot.local)
+
+KINEMATIC CONSTRAINTS:
+- Elbow Safety Threshold: 160 degrees
+- Base Range: 0 - 180 degrees
+- Smoothing Delay: 35ms per degree
