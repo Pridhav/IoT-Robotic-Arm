@@ -23,7 +23,12 @@ To prevent servo gear stripping (a common failure in SG90-based systems), I deve
 * **Dead-band Filtering:** Eliminates servo "hunting" and jitter.
 * **Sequential Tucking:** Optimizes the elbow-shoulder movement sequence to minimize the moment of inertia and protect the shoulder joint.
 
-## 📐 Hardware Specifications
+## Build Context
+* **Chassis/Frame:** Utilized a vendor-fabricated acrylic 4-DOF frame. 
+* **Actuation Suite (Custom):** All stock motors were replaced with high-torque SG90 servos to meet the precision requirements of the `moveSmooth` algorithm.
+* **Control System (Custom):** Designed and implemented the full electronics stack, including the ESP32 control node, power distribution rail, and asynchronous WiFi communication bridge.
+
+## Hardware Specifications
 * **Controller:** ESP32 (WROOM-32)
 * **Actuators:** 4x SG90 Servos (Base, Shoulder, Elbow, Gripper)
 * **Displacement:** >600mm lateral reach (180° rotation)
@@ -39,6 +44,19 @@ To prevent servo gear stripping (a common failure in SG90-based systems), I deve
 * **Mechanical Stress:** Optimized the elbow trajectory to 160° to avoid "crunch zones" that were previously stripping gears.
 * **Latency:** Implemented a non-blocking `handleClient()` loop to ensure the robot responds instantly to WiFi triggers while maintaining manual Serial override.
 
----
-**Developed by:** Team RoboCop - Pridhav Krishna
-**Focus:** Electronics & Communication Engineering (ECE) - Cyber Physical Systems
+## Project Demonstration
+
+The following video demonstrates the **Actuator Node** executing the full industrial dyeing routine. 
+
+> **Note:** For the clarity of this demonstration, the arm is shown executing the 180-degree displacement and "tuck-and-home" sequence via manual trigger to highlight the kinematic smoothing logic.
+
+* **[Watch the Robot Arm in Action](https://www.youtube.com/shorts/FPEyqhMEIvo)**
+
+## 👥 Collaborators & Credits
+
+This project was a collaborative effort involving hardware-software co-design:
+
+* **Kopal Kaushiki:** Developed the core **Computer Vision Logic**, including HSV color-space masking, contour detection, and real-time bounding box visualization.
+* **Pridhav Krishna (Lead Systems Integrator):**
+    * Authored the **ESP32 Firmware** and custom `moveSmooth` kinematic algorithms.
+    * Developed the **Asynchronous IoT Bridge** (Python-to-ESP32 REST API) to enable wireless triggering.
